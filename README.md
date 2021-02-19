@@ -1,6 +1,6 @@
 # user_preferences
 
-A new Flutter project.
+A Templete App where user preferences are saved.
 
 ## Getting Started
 
