@@ -18,7 +18,7 @@ class CustomDrawer extends StatelessWidget {
 
           ListTile(
             leading: Icon(Icons.accessible_outlined),
-            title: Text('Sexo'),
+            title: Text('Usuario'),
             onTap: (){
              Navigator.pushReplacementNamed(context, '/');
             },
@@ -26,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
 
           ListTile(
             leading: Icon(Icons.radio),
-            title: Text('Anal'),
+            title: Text('Localización'),
             onTap: (){},
           ),
 
