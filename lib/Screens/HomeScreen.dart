@@ -14,9 +14,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("juan es muy buena persona"), 
-                Text("juan es muy buena persona"), 
-                Text("juan es muy buena persona"), 
+                Text("Daniel es hembrita"),
               ],
           ),
       ),
