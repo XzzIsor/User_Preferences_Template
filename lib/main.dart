@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'Provider/User_Preference_Provider.dart';
 import 'Screens/HomeScreen.dart';
 import 'Screens/SettingScreen.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  final instance = UserPreference.getInstance();
+  instance.initializeSharedPreference();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,9 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       initialRoute: "/",
       routes: {
-        "/" :  (BuildContext context) => HomeScreen(),
-        "settings" : (BuildContext context) => SettingsScreen(),
+        "/": (BuildContext context) => HomeScreen(),
+        "settings": (BuildContext context) => SettingsScreen(),
       },
-      );
+    );
   }
 }
