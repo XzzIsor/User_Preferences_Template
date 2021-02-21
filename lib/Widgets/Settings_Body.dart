@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_preferences/Provider/User_Preference_Provider.dart';
 
 class SettingsBody extends StatefulWidget {
+  SettingsBody(this.setStateSettingScreen);
+  Function setStateSettingScreen;
+
   @override
   _SettingsBodyState createState() => _SettingsBodyState();
 }
 
 class _SettingsBodyState extends State<SettingsBody> {
-  bool _colorSecundario = false;
+  bool _secondaryColor = false;
   int _genderRatioOption;
-
-  String _nombre = "Pedro";
   TextEditingController _textController;
-  SharedPreferences prefs;
+  UserPreference instance = UserPreference.getInstance();
 
   @override
   void initState() {
     super.initState();
-    UserPreference instance = UserPreference.getInstance();
-    prefs = instance.getPrefs();
-    _genderRatioOption = prefs.getInt('gender');
-    _textController = new TextEditingController(text: _nombre);
+    instance.lastPage = 'settings';
+    _genderRatioOption = instance.gender;
+    _secondaryColor = instance.seconndaryColor;
+    _textController = new TextEditingController(text: instance.name);
   }
 
   _setSelectedRadio(int value) {
-    prefs.setInt('gender', value);
+    instance.gender = value;
     setState(() {
       _genderRatioOption = value;
     });
@@ -49,17 +49,19 @@ class _SettingsBodyState extends State<SettingsBody> {
         ),
         Divider(),
         SwitchListTile(
-          value: _colorSecundario,
+          value: _secondaryColor,
           onChanged: (value) {
-            setState(() {
-              _colorSecundario = value;
-            });
+            
+              _secondaryColor = value;
+              instance.seconndaryColor = value;
+              widget.setStateSettingScreen(); 
+            
           },
           title: Text('Usar Color Secundario'),
           activeColor: Colors.amber,
         ),
         RadioListTile(
-          title: Text('Macho Opresor'),
+          title: Text('Macho'),
           value: 1,
           activeColor: Colors.amber,
           onChanged: _setSelectedRadio,
@@ -67,7 +69,7 @@ class _SettingsBodyState extends State<SettingsBody> {
         ),
         RadioListTile(
           value: 2,
-          title: Text("envra"),
+          title: Text("Hembra"),
           activeColor: Colors.amber,
           onChanged: _setSelectedRadio,
           groupValue: _genderRatioOption,
@@ -82,6 +84,9 @@ class _SettingsBodyState extends State<SettingsBody> {
                 labelText: 'Nombre',
                 focusColor: Colors.amber,
                 fillColor: Colors.amber),
+            onChanged: (value) {
+              instance.name = value;
+            },
           ),
         )
       ],

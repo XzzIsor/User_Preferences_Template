@@ -1,16 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreference {
-  static UserPreference instance;
+  static UserPreference _instance;
   SharedPreferences prefs;
 
   UserPreference._();
 
   static UserPreference getInstance() {
-    if (instance == null) {
-      instance = UserPreference._();
+    if (_instance == null) {
+      _instance = UserPreference._();
     }
-    return instance;
+    return _instance;
   }
 
   Future<void> initializeSharedPreference() async {
@@ -18,7 +18,36 @@ class UserPreference {
     return;
   }
 
-  SharedPreferences getPrefs(){
-    return prefs;
+  get name {
+    return prefs.getString('name') ?? '';
   }
+
+  set name(String value) {
+    prefs.setString('name', value);
+  }
+
+    get seconndaryColor {
+    return prefs.getBool('seconndaryColor') ?? false;
+  }
+
+  set seconndaryColor(bool value) {
+    prefs.setBool('seconndaryColor', value);
+  }
+
+    get gender {
+   return prefs.getInt('gender') ?? 1;
+  }
+
+  set gender(int value) {
+    prefs.setInt('gender', value);
+  }
+
+ get lastPage {
+    return prefs.getString('lastPage') ?? '/';
+  }
+
+  set lastPage(String value) {
+    prefs.setString('lastPage', value);
+  }
+
 }
